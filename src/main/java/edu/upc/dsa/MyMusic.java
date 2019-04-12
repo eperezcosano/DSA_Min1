@@ -44,4 +44,9 @@ public interface MyMusic {
     List<Artist> getArtists();
 
     List<Playlist> getPlaylist(String idUser) throws UserNotFoundException;
+
+    int numUsers();
+    int numArtist();
+    int numPlaylists();
+    void clear();
 }

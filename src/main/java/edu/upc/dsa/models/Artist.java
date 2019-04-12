@@ -19,6 +19,11 @@ public class Artist {
         this.playlists = new LinkedList<>();
     }
 
+    //Methods
+    public void addPlaylist(Playlist playlist) {
+        this.playlists.add(playlist);
+    }
+
     //Getters and setters
     public String getIdArtist() {
         return idArtist;
