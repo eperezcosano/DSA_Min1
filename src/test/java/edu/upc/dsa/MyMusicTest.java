@@ -3,16 +3,11 @@ package edu.upc.dsa;
 import edu.upc.dsa.exceptions.ArtistNotFoundException;
 import edu.upc.dsa.exceptions.PlaylistNotFoundException;
 import edu.upc.dsa.exceptions.UserNotFoundException;
-import edu.upc.dsa.models.Artist;
-import edu.upc.dsa.models.Playlist;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class MyMusicTest {
 
