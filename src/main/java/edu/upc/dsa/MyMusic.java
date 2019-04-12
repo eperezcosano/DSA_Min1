@@ -45,6 +45,8 @@ public interface MyMusic {
 
     List<Playlist> getPlaylist(String idUser) throws UserNotFoundException;
 
+    Playlist getPlaylistById(String idPlaylist) throws PlaylistNotFoundException;
+
     int numUsers();
     int numArtist();
     int numPlaylists();

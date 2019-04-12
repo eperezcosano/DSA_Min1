@@ -77,7 +77,7 @@ public class MyMusicImpl implements MyMusic {
 
     @Override
     public void setTittle(String tittle, String idPlaylist) throws PlaylistNotFoundException {
-        Playlist playlist = this.playlists.get(this.getPlaylistById(idPlaylist));
+        Playlist playlist = this.getPlaylistById(idPlaylist);
         playlist.setTitle(tittle);
         log.info("Tittle set to: " + tittle);
     }
@@ -131,9 +131,9 @@ public class MyMusicImpl implements MyMusic {
         throw new ArtistNotFoundException();
     }
 
-    private int getPlaylistById(String idPlaylist) throws PlaylistNotFoundException {
+    public Playlist getPlaylistById(String idPlaylist) throws PlaylistNotFoundException {
         for (int i = 0; i < this.numPlaylists(); i++) {
-            if (idPlaylist.equals(this.playlists.get(i).getIdPlaylist())) return i;
+            if (idPlaylist.equals(this.playlists.get(i).getIdPlaylist())) return this.playlists.get(i);
         }
         log.info("Playlist not found");
         throw new PlaylistNotFoundException();
