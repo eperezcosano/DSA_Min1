@@ -48,5 +48,17 @@ public class MyMusicServices {
         return Response.status(201).build();
     }
 
+    @GET
+    @ApiOperation(value = "get list of artists")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful", response = Artist.class, responseContainer="List")
+    })
+    @Path("/artists")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getArtists() {
+        List<Artist> artists = this.myMusic.getArtists();
+        GenericEntity<List<Artist>> entity = new GenericEntity<List<Artist>>(artists) {};
+        return Response.status(200).entity(entity).build();
+    }
 
 }
