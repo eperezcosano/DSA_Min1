@@ -61,4 +61,62 @@ public class MyMusicServices {
         return Response.status(200).entity(entity).build();
     }
 
+    @POST
+    @ApiOperation(value = "add playlist")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 404, message = "ArtistNotFoundException"),
+            @ApiResponse(code = 405, message = "UserNotFoundException")
+    })
+    @Path("/playlist/{idArtist}/{idUser}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addPlaylist(Playlist playlist, @PathParam("idArtist") String idArtist, @PathParam("idUser") String idUser) {
+        try {
+            this.myMusic.addPlaylist(playlist.getIdPlaylist(), playlist.getTitle(), idArtist, playlist.getAlbum(), playlist.getDuration(), idUser);
+            return Response.status(201).build();
+        } catch (ArtistNotFoundException e) {
+            e.printStackTrace();
+            return Response.status(404).build();
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
+            return Response.status(405).build();
+        }
+    }
+
+    @PUT
+    @ApiOperation(value = "update playlist tittle")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 404, message = "Playlist not found")
+    })
+    @Path("/{idPlaylist}")
+    public Response updateTrack(String tittle, @PathParam("idPlaylist") String idPlaylist) {
+        try {
+            this.myMusic.setTittle(tittle, idPlaylist);
+            return Response.status(201).build();
+        } catch (PlaylistNotFoundException e) {
+            e.printStackTrace();
+            return Response.status(404).build();
+        }
+    }
+
+    @GET
+    @ApiOperation(value = "get list playlist of an user")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful", response = Playlist.class, responseContainer="List"),
+            @ApiResponse(code = 404, message = "UserNotFoundException")
+    })
+    @Path("/{idUser}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPlaylistsByUser(@PathParam("idUser") String idUser) {
+        try {
+            List<Playlist> playlists = this.myMusic.getPlaylist(idUser);
+            GenericEntity<List<Playlist>> entity = new GenericEntity<List<Playlist>>(playlists) {};
+            return Response.status(200).entity(entity).build();
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
+            return Response.status(404).build();
+        }
+    }
+
 }
