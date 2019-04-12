@@ -27,14 +27,21 @@ public interface MyMusic {
 
     /**
      * Add a new play-list
-     * @param tittle
-     * @param idArtist
-     * @param album
-     * @param idUser
+     * @param tittle playlist tittle
+     * @param idArtist artist identifier
+     * @param album album name
+     * @param idUser user identifier
+     * @throws UserNotFoundException if user does not exist
+     * @throws ArtistNotFoundException if artist does not exist
      */
     void addPlaylist(String idPlaylist, String tittle, String idArtist, String album, int duration, String idUser) throws ArtistNotFoundException, UserNotFoundException;
 
-    /**/
+    /**
+     * Set playlist tittle
+     * @param tittle playlist tittle
+     * @param idPlaylist playlist identifier
+     * @throws PlaylistNotFoundException if playlist does not exist
+     */
     void setTittle(String tittle, String idPlaylist) throws PlaylistNotFoundException;
 
     /**
@@ -43,12 +50,42 @@ public interface MyMusic {
      */
     List<Artist> getArtists();
 
+    /**
+     * List of playlist of an user
+     * @param idUser user identifier
+     * @return list of playlist
+     * @throws UserNotFoundException if user does not exists
+     */
     List<Playlist> getPlaylist(String idUser) throws UserNotFoundException;
 
+    /**
+     * Get playlist by its id
+     * @param idPlaylist playlist identifier
+     * @return playlist
+     * @throws PlaylistNotFoundException if playlist does not exist
+     */
     Playlist getPlaylistById(String idPlaylist) throws PlaylistNotFoundException;
 
+    /**
+     * Get the number of users
+     * @return number of users
+     */
     int numUsers();
+
+    /**
+     * Get the number of artists
+     * @return number of artists
+     */
     int numArtist();
+
+    /**
+     * Get the number of playlists
+     * @return number of playlists
+     */
     int numPlaylists();
+
+    /**
+     * Clear data structures
+     */
     void clear();
 }
