@@ -22,9 +22,8 @@ public interface MyMusic {
      * Add a new Artist
      * @param idArtist artist identifier
      * @param name name of the artist
-     * @param surname surname of the artist
      */
-    void addArtist(String idArtist, String name, String surname);
+    void addArtist(String idArtist, String name);
 
     /**
      * Add a new play-list
